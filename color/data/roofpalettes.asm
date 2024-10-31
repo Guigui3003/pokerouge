@@ -50,8 +50,8 @@ PewterRoof:
 	RGB 20,17,19
 
 CeruleanRoof:
-	RGB 14,24,31
-	RGB 14,20,26
+	RGB 10,25,27
+	RGB 06,20,22
 
 LavenderRoof:
 	RGB 23,12,31

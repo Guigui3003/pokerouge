@@ -2908,7 +2908,7 @@ PrintMenuItem:
 	hlcoord 7, 11
 	ld [hl], "/"
 	hlcoord 5, 9
-	ld [hl], "/"
+	ld [hl], ""
 	hlcoord 5, 11
 	ld de, wBattleMenuCurrentPP
 	lb bc, 1, 2

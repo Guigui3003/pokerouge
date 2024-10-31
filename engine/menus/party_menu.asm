@@ -12,7 +12,7 @@ RedrawPartyMenu_::
 	jp z, .printMessage
 	call ErasePartyMenuCursors
 	farcall InitPartyMenuBlkPacket
-	hlcoord 3, 0
+	hlcoord 4, 0
 	ld de, wPartySpecies
 	xor a
 	ld c, a
@@ -63,13 +63,13 @@ RedrawPartyMenu_::
 	cp EVO_STONE_PARTY_MENU
 	jr z, .evolutionStoneMenu
 	push hl
-	ld bc, 14 ; 14 columns to the right
+	ld bc, 13 ; 14 columns to the right
 	add hl, bc
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
 	pop hl
 	push hl
-	ld bc, SCREEN_WIDTH + 1 ; down 1 row and right 1 column
+	ld bc, SCREEN_WIDTH + 0 ; down 1 row and right 1 column
 	ldh a, [hUILayoutFlags]
 	set BIT_PARTY_MENU_HP_BAR, a
 	ldh [hUILayoutFlags], a
@@ -91,7 +91,7 @@ RedrawPartyMenu_::
 	jr nz, .placeMoveLearnabilityString
 	ld de, .notAbleToLearnMoveText
 .placeMoveLearnabilityString
-	ld bc, 20 + 9 ; down 1 row and right 9 columns
+	ld bc, 19 + 9 ; down 1 row and right 9 columns
 	push hl
 	add hl, bc
 	call PlaceString
@@ -158,7 +158,7 @@ RedrawPartyMenu_::
 ; if it does match
 	ld de, .ableToEvolveText
 .placeEvolutionStoneString
-	ld bc, 20 + 9 ; down 1 row and right 9 columns
+	ld bc, 19 + 9 ; down 1 row and right 9 columns
 	pop hl
 	push hl
 	add hl, bc

@@ -12,7 +12,7 @@ PalletTown_Object:
 	warp_event 12, 11, OAKS_LAB, 2
 
 	def_bg_events
-	bg_event 13, 13, TEXT_PALLETTOWN_OAKSLAB_SIGN
+	bg_event 15, 12, TEXT_PALLETTOWN_OAKSLAB_SIGN
 	bg_event  7,  9, TEXT_PALLETTOWN_SIGN
 	bg_event  3,  5, TEXT_PALLETTOWN_PLAYERSHOUSE_SIGN
 	bg_event 11,  5, TEXT_PALLETTOWN_RIVALSHOUSE_SIGN

@@ -73,6 +73,14 @@ DEF SET_PAL_DEFAULT EQU $ff
 	const PAL_BADGE     ; $22
 	const PAL_CAVE      ; $23
 	const PAL_GAMEFREAK ; $24
+; TYPES	
+    const PAL_FIRE
+; MOVES	
+	const PAL_AURORA
+	const PAL_BUBBLE
+	const PAL_DRAGON_RAGE
+	const PAL_PSYBEAM
+	const PAL_SAND_ATTACK
 IF GEN_2_GRAPHICS
 	const PAL_BULBASAUR  ; $25
 	const PAL_IVYSAUR    ; $26

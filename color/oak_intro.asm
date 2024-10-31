@@ -17,6 +17,15 @@ ELSE
 	ld a, PAL_REDMON
 ENDC
 	jr GotPalID
+	
+GetGreenPalID:
+	call ClearScreen
+IF GEN_2_GRAPHICS
+	ld a, PAL_JR_TRAINER_F
+ELSE
+	ld a, PAL_REDMON
+ENDC
+	jr GotPalID	
 
 GetRivalPalID:
 	call ClearScreen

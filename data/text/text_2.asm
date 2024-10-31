@@ -1875,3 +1875,8 @@ _TextIDErrorText::
 _ContCharText::
 	text "<_CONT>@"
 	text_end
+
+_BoyGirlText::
+    text "Jouer un garçon"
+    line "ou bien une fille?"
+    done

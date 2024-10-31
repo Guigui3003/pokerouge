@@ -1,10 +1,9 @@
 ; 8 bytes per tileset for 8 palettes, which are taken from MapPalettes.
 MapPaletteSets:
 .overworldPalSet:	
-.forestPalSet:
 .plateauPalSet:
 	db OUTDOOR_GRAY
-	db OUTDOOR_FLOWER
+	db OUTDOOR_RED
 	db OUTDOOR_GREEN
 	db OUTDOOR_BLUE
 	db OUTDOOR_YELLOW
@@ -104,6 +103,16 @@ MapPaletteSets:
 	db INDOOR_BROWN
 	db INDOOR_LIGHT_BLUE
 	db PC_POKEBALL_PAL
+	
+.forestPalSet:
+	db OUTDOOR_GRAY
+	db OUTDOOR_RED
+	db OUTDOOR_GREEN
+	db OUTDOOR_BLUE
+	db OUTDOOR_YELLOW
+	db OUTDOOR_BROWN
+	db FOREST_TREES
+	db CRYS_TEXTBOX
 
 .pointers
 	table_width 1, .pointers

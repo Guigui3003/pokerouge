@@ -293,16 +293,16 @@ ColorNonOverworldSprites::
 	cp 8 ; if 8, colorize based on attack type
 	jr z, .getAttackType
 	cp 9 ; if 9, do not colorize (use whatever palette it's set to already)
-	jr z, .nextSprite
+	jp z, .nextSprite
 	cp 10 ; if 10 (used in game freak intro), color based on sprite number
 	jr z, .gameFreakIntro
-	jr .setPalette ; Otherwise, use the value as-is
+	jp .setPalette ; Otherwise, use the value as-is
 
 .gameFreakIntro: ; The stars under the logo all get different colors
 	ld a, b
 	and 3
 	add 4
-	jr .setPalette
+	jp .setPalette
 
 .getAttackType
 	push hl
@@ -319,23 +319,132 @@ ColorNonOverworldSprites::
 	ld a, d
 	cp ABSORB
 	ld a, GRASS
-	jr z, .gotType
+	jp z, .gotType
 
 	; Make stun spore and solarbeam yellow, despite being grass moves
 	ld a, d
 	cp STUN_SPORE
 	ld a, ELECTRIC
-	jr z, .gotType
+	jp z, .gotType
 	ld a, d
 	cp SOLARBEAM
 	ld a, ELECTRIC
-	jr z, .gotType
+	jp z, .gotType
 
 	; Make tri-attack yellow, despite being a normal move
 	ld a, d
 	cp TRI_ATTACK
 	ld a, ELECTRIC
-	jr z, .gotType
+	jp z, .gotType
+	
+	; FIRE MOVES
+	ld a, d
+	cp EMBER
+	jp nz, .notEmber
+	lb de, PAL_FIRE, 2
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, FIRE
+	jp .gotType
+.notEmber
+	ld a, d
+	cp FLAMETHROWER
+	jp nz, .notFlamethrower
+	lb de, PAL_FIRE, 2
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, FIRE
+	jp .gotType
+.notFlamethrower
+
+
+	; AURORA_BEAM
+    ld a, d
+	cp AURORA_BEAM
+	jp nz, .notAuroraBeam
+	lb de, PAL_AURORA, 6
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, ICE
+	jp .gotType
+.notAuroraBeam	
+
+    ; BUBBLE + BUBBLEBEAM
+    ld a, d
+	cp BUBBLEBEAM
+	jp nz, .notBubblebeam
+	lb de, PAL_BUBBLE, 1
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, WATER
+	jp .gotType
+.notBubblebeam
+    ld a, d
+	cp BUBBLE
+	jp nz, .notBubble
+	lb de, PAL_BUBBLE, 1
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, WATER
+	jp .gotType
+.notBubble
+
+	; DRAGON RAGE
+	ld a, d
+	cp DRAGON_RAGE
+	jp nz, .notDragonRage
+	lb de, PAL_DRAGON_RAGE, 1
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, DRAGON
+	jp .gotType
+.notDragonRage
+
+	; PSYBEAM
+	ld a, d
+	cp PSYBEAM
+	jp nz, .notPsybeam
+	lb de, PAL_PSYBEAM, 7
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, PSYCHIC_TYPE
+	jp .gotType
+.notPsybeam
+
+	; SAND_ATTACK
+	ld a, d
+	cp SAND_ATTACK
+	jp nz, .notSandAttack
+	lb de, PAL_SAND_ATTACK, 3
+	push bc
+	call LoadSGBPalette_Sprite
+	pop bc
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+	ld a, GROUND
+	jp .gotType
+.notSandAttack
 
 	ldh a, [hWhoseTurn]
 	and a
@@ -364,7 +473,7 @@ ColorNonOverworldSprites::
 .nextSprite
 	inc hl
 	dec b
-	jr nz, .spriteLoop
+	jp nz, .spriteLoop
 
 .end
 	xor a
@@ -778,7 +887,7 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	table_width 1, TypeColorTable
 	db 0 ; NORMAL EQU $00
 	db 0 ; FIGHTING EQU $01
-	db 0 ; FLYING EQU $02
+	db 6 ; FLYING EQU $02
 	db 7 ; POISON EQU $03
 	db 3 ; GROUND EQU $04
 	db 3 ; ROCK EQU $05
@@ -814,7 +923,7 @@ PartyPaletteAssignments:
 	; MISSINGNO
 	db PARTY_PAL_PURPLE
 	; BULBASAUR
-	db PARTY_PAL_GREEN
+	db SPRITE_PAL_BULBASAUR
 	; IVYSAUR
 	db PARTY_PAL_GREEN
 	; VENUSAUR
@@ -826,13 +935,13 @@ PartyPaletteAssignments:
 	; CHARIZARD
 	db PARTY_PAL_RED
 	; SQUIRTLE
-	db PARTY_PAL_BLUE
+	db SPRITE_PAL_SQUIRTLE
 	; WARTORTLE
 	db PARTY_PAL_BLUE
 	; BLASTOISE
 	db PARTY_PAL_BLUE
 	; CATERPIE
-	db PARTY_PAL_GREEN
+	db SPRITE_PAL_CATERPIE
 	; METAPOD
 	db PARTY_PAL_GREEN
 	; BUTTERFREE
@@ -844,7 +953,7 @@ PartyPaletteAssignments:
 	; BEEDRILL
 	db PARTY_PAL_YELLOW
 	; PIDGEY
-	db PARTY_PAL_BROWN
+	db SPRITE_PAL_PIDGEY
 	; PIDGEOTTO
 	db PARTY_PAL_BROWN
 	; PIDGEOT
@@ -862,7 +971,7 @@ PartyPaletteAssignments:
 	; ARBOK
 	db PARTY_PAL_PURPLE
 	; PIKACHU
-	db PARTY_PAL_RED
+	db SPRITE_PAL_PIKACHU
 	; RAICHU
 	db PARTY_PAL_YELLOW
 	; SANDSHREW

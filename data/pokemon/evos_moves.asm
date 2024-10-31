@@ -1755,6 +1755,10 @@ BulbasaurEvosMoves:
 	db EVOLVE_LEVEL, 16, IVYSAUR
 	db 0
 ; Learnset
+	db 5, DRAGON_RAGE
+	db 5, BUBBLEBEAM
+	db 5, RAZOR_LEAF
+	db 5, FLAMETHROWER
 	db 7, LEECH_SEED
 	db 13, VINE_WHIP
 	db 20, POISONPOWDER
