@@ -1032,9 +1032,22 @@ SetPal_TrainerCard:
 	ld e, 3
 	farcall LoadSGBPalette
 
-	; Red's palette
+	; Hero palette Trainer Card
 IF GEN_2_GRAPHICS
-	ld d, PAL_HERO
+	ld a, 0
+	ldh [rSVBK], a
+	
+    ld d, PAL_HERO
+    ld a, [wPlayerGender]
+    and a
+    jr z, .AreBoy
+    ld d, PAL_JR_TRAINER_F
+.AreBoy
+    ld a, d
+	
+	ld a, 2
+	ldh [rSVBK], a
+	
 ELSE
 	ld d, PAL_REDMON
 ENDC
@@ -1043,9 +1056,9 @@ ENDC
 
 	; Palette for border tiles
 IF DEF(_BLUE)
-	ld d, PAL_BLUEMON
+	ld d, PAL_GREYMON
 ELSE ; _RED
-	ld d, PAL_REDMON
+	ld d, PAL_GREYMON
 ENDC
 	ld e, 5
 	farcall LoadSGBPalette

@@ -42,8 +42,8 @@ PalletRoof:
 	RGB 24,24,24
 
 ViridianRoof:
-	RGB 0,29,7
-	RGB 0,24,7
+	RGB 10,28,22
+	RGB 2,20,14
 
 PewterRoof:
 	RGB 24,25,26

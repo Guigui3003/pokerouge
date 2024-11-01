@@ -121,8 +121,14 @@ ColorOverworldSprite::
 	ld d, wSpriteStateData1 >> 8
 	ld a, [de] ; Load A with picture ID
 
-	cp SPRITE_RED
-	jr nz, .notRed
+    cp SPRITE_RED                 ; check if the value match the one of SPRITE_RED
+    ld a, [wSavedSpritePictureID] ; load the previously saved sprite ID in A to compare
+	jr nz, .notPlayerSprite       ; if it doesnt match (nz) then jump to .notPlayerSprite
+    ld a, [wPlayerGender]         ; load the value saved in wPlayerGender that define if boy or girl. 0 is boy, 1 is girl
+    and a                         ; check if value in A = 0
+    ld a, SPR_PAL_GREEN           ; load the palette slot value in A to be used if girl
+    jr nz, .norandomColor         ; if not 0 (so 1 = girl) jump to .norandomColor to use the slot value loaded just before
+.notPlayerSprite
 
 	ld a, [wWalkBikeSurfState]
 	cp 2
@@ -566,6 +572,9 @@ SpritePaletteAssignments: ; Characters on the overworld
 	table_width 1, SpritePaletteAssignments
 	; 0x01: SPRITE_RED
 	db SPR_PAL_ORANGE
+	
+	; 0x0X: SPRITE_GREEN
+	db SPR_PAL_GREEN
 
 	; 0x02: SPRITE_BLUE
 	db SPR_PAL_BLUE

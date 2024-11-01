@@ -149,7 +149,6 @@ ROMX $1B
 	"Tilesets 3"
 ROMX $1C
 	"bank1C"
-	org $4a6e
 	"BattleTransition_BlackScreen"
 	org $5fb6
 	"InitPartyMenuBlkPacket"
@@ -160,6 +159,7 @@ ROMX $1C
 	"Engine Save"
 ROMX $1D
 	"Maps 19"
+	org $4a6e
 	"Itemfinder 1"
 	"Maps 20"
 	"Vending Machine"

@@ -2,25 +2,25 @@ MapSpritePalettes: ; Taken from pokemon GSC.
 
 ; PAL_OW_RED
 	RGB 27,31,27
-	RGB 31,19,10
-	RGB 31,7,1
+	RGB 30,23,20
+	RGB 26,2,0
 	RGB 0,0,0
 
 ; PAL_OW_BLUE
 	RGB 27,31,27
-	RGB 31,19,10
-	RGB 10,9,31
+	RGB 30,23,20
+	RGB 0,10,24
 	RGB 0,0,0
 
 ; PAL_OW_GREEN
 	RGB 27,31,27
-	RGB 31,19,10
-	RGB 7,23,3
+	RGB 30,23,20
+	RGB 0,18,4
 	RGB 0,0,0
 
 ; PAL_OW_BROWN
 	RGB 27,31,27
-	RGB 31,19,10
+	RGB 30,23,20
 	RGB 15,10,3
 	RGB 0,0,0
 
@@ -32,7 +32,7 @@ MapSpritePalettes: ; Taken from pokemon GSC.
 
 ; PAL_OW_PURPLE
 	RGB 27,31,27
-	RGB 31,19,10
+	RGB 30,23,20
 	RGB 18,4,18
 	RGB 0,0,0
 
